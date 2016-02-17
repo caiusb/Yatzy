@@ -1,6 +1,7 @@
 package edu.oregonstate.cs519.yatzy;
 
 import static org.junit.Assert.*;
+import static edu.oregonstate.cs519.yatzy.Bet.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -16,21 +17,21 @@ public class YatzyTest {
 	
 	@Test
 	public void testChanceForZero() {
-		assertEquals(0, yatzy.score(new int[]{0, 0, 0, 0, 0}));
+		assertEquals(0, yatzy.score(CHANCE, new int[]{0, 0, 0, 0, 0}));
 	}
 
 	@Test
 	public void testChanceForOneDieNotZero() {
-		assertEquals(1, yatzy.score(new int[]{1, 0, 0, 0, 0}));
+		assertEquals(1, yatzy.score(CHANCE, new int[]{1, 0, 0, 0, 0}));
 	}
 	
 	@Test
 	public void testForAllDiceNotZero() {
-		assertEquals(5, yatzy.score(new int[]{1, 1, 1, 1, 1}));
+		assertEquals(5, yatzy.score(CHANCE, new int[]{1, 1, 1, 1, 1}));
 	}
 	
 	@Test
 	public void testForSomeOtherCombination() {
-		assertEquals(21, yatzy.score(new int[]{1, 2, 3, 4, 5, 6}));
+		assertEquals(21, yatzy.score(CHANCE, new int[]{1, 2, 3, 4, 5, 6}));
 	}
 }
