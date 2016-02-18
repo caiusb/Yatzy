@@ -44,4 +44,19 @@ public class YatzyTest {
 	public void testWithLargerRoll() throws Exception {
 		yatzy.score(CHANCE, new int[]{1, 2, 3, 4, 5, 6});
 	}
+	
+	@Test
+	public void testForPair() throws Exception {
+		assertEquals(2, yatzy.score(PAIR, new int[]{1, 1, 3, 4, 5}));
+	}
+	
+	@Test
+	public void testForOutOfOrderPair() throws Exception {
+		assertEquals(2, yatzy.score(PAIR, new int[]{1, 3, 4, 1, 5}));
+	}
+	
+	@Test
+	public void testPairForMoreThanTwo() throws Exception {
+		assertEquals(0, yatzy.score(PAIR, new int[]{1, 3, 4, 1, 1}));
+	}
 }
