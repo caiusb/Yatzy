@@ -16,22 +16,32 @@ public class YatzyTest {
 	}
 	
 	@Test
-	public void testChanceForZero() {
+	public void testChanceForZero() throws InvalidRollException {
 		assertEquals(0, yatzy.score(CHANCE, new int[]{0, 0, 0, 0, 0}));
 	}
 
 	@Test
-	public void testChanceForOneDieNotZero() {
+	public void testChanceForOneDieNotZero() throws Exception {
 		assertEquals(1, yatzy.score(CHANCE, new int[]{1, 0, 0, 0, 0}));
 	}
 	
 	@Test
-	public void testForAllDiceNotZero() {
+	public void testForAllDiceNotZero() throws Exception {
 		assertEquals(5, yatzy.score(CHANCE, new int[]{1, 1, 1, 1, 1}));
 	}
 	
 	@Test
-	public void testForSomeOtherCombination() {
-		assertEquals(21, yatzy.score(CHANCE, new int[]{1, 2, 3, 4, 5, 6}));
+	public void testForSomeOtherCombination() throws Exception {
+		assertEquals(15, yatzy.score(CHANCE, new int[]{1, 2, 3, 4, 5}));
+	}
+	
+	@Test(expected=InvalidRollException.class)
+	public void testWithSmallerRoll() throws Exception {
+		yatzy.score(CHANCE, new int[]{1, 2});
+	}
+	
+	@Test(expected=InvalidRollException.class)
+	public void testWithLargerRoll() throws Exception {
+		yatzy.score(CHANCE, new int[]{1, 2, 3, 4, 5, 6});
 	}
 }
