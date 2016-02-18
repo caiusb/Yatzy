@@ -9,33 +9,41 @@ public class Yatzy {
 			throw new InvalidRollException();
 		switch(bet) {
 		case CHANCE:
-			int sum = 0;
-			for (int die : roll)
-				sum += die;
-			return sum;
+			return calculateChance(roll);
 		case PAIR:
-			Arrays.sort(roll);
-			int last = 0;
-			int value = 0;
-			boolean pair = false;
-			for (int die : roll)
-				if (last == 0)
-					last = die;
-				else
-					if (last == die)
-						if (!pair) {
-							pair = true;
-							value = die;
-						}
-						else
-							pair = false;
-			
-			if (pair)
-				return value*2;
-			
-			return 0;
+			return calculatePair(roll);
 		}
 		
 		return -1;
+	}
+
+	public int calculatePair(int[] roll) {
+		Arrays.sort(roll);
+		int last = 0;
+		int value = 0;
+		boolean pair = false;
+		for (int die : roll)
+			if (last == 0)
+				last = die;
+			else
+				if (last == die)
+					if (!pair) {
+						pair = true;
+						value = die;
+					}
+					else
+						pair = false;
+		
+		if (pair)
+			return value*2;
+		
+		return 0;
+	}
+
+	public int calculateChance(int[] roll) {
+		int sum = 0;
+		for (int die : roll)
+			sum += die;
+		return sum;
 	}
 }
